@@ -1,4 +1,17 @@
 <?php 
+
+//Função Verifica Login
+
+function verifica_login()
+{
+	if( ! is_user_logged_in() )
+	wp_redirect( get_bloginfo('siteurl').'/wp-login.php' );
+}
+add_action( 'get_header', 'verifica_login' );
+
+//
+
+
 	//indica que temos suporte aos 03 tamanhos dos thumbs.
 	add_theme_support( 'post-thumbnails' );
 	
