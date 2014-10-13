@@ -10,7 +10,7 @@ function verifica_login()
 	if( ! is_user_logged_in() )
 	wp_redirect( get_bloginfo('siteurl').'/wp-login.php' );
 }
-add_action( 'get_header', 'verifica_login' );
+//add_action( 'get_header', 'verifica_login' );
 
 
 
