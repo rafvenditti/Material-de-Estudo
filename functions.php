@@ -1,6 +1,9 @@
 <?php 
 
-//Função Verifica Login
+
+//////////////////////////////////////////////////////////////////////////
+///        FUNCAO VERIFICA LOGIN                                    /////
+////////////////////////////////////////////////////////////////////////
 
 function verifica_login()
 {
@@ -9,19 +12,19 @@ function verifica_login()
 }
 add_action( 'get_header', 'verifica_login' );
 
-//
 
+
+//////////////////////////////////////////////////////////////////////////
+///        DECLARANDO SUPORTE "IMAGEM DESTACADA"                    /////
+////////////////////////////////////////////////////////////////////////
 
 	//indica que temos suporte aos 03 tamanhos dos thumbs.
 	add_theme_support( 'post-thumbnails' );
-	
-	//registrando o menu para nao quebrar no admin - estamos dando suporte para menus, sem isso nao aparece o menu no admin. 
-	register_nav_menu('menu', '');
-	
-	
+
+		
 	
 //////////////////////////////////////////////////////////////////////////
-///        FUNCAO PARA LIMITAR OS CARACTERES                            /////
+///        FUNCAO PARA LIMITAR OS CARACTERES                        /////
 ////////////////////////////////////////////////////////////////////////
 
 	function custom_excerpt_length($lenght){
@@ -29,7 +32,20 @@ add_action( 'get_header', 'verifica_login' );
 		return 10;
 	}
 	add_filter('excerpt_length', 'custom_excerpt_length');
+
+//////////////////////////////////////////////////////////////////////////
+///        Inserindo a imagem de destaque para o FEED               /////
+////////////////////////////////////////////////////////////////////////
 	
+add_filter('the_content_feed', 'rss_post_thumbnail');
+function rss_post_thumbnail($content) {
+	global $post;
+	if( has_post_thumbnail($post->ID) )
+		$content = '<p>' . get_the_post_thumbnail($post->ID, 'thumbnail') . '</p>' . $content;
+	return $content;
+}
+
+
 //////////////////////////////////////////////////////////////////////////
 ///        FUNCAO PARA TROCAR BACKGROUND                            /////
 ////////////////////////////////////////////////////////////////////////
