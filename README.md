@@ -7,5 +7,5 @@ Projeto criado para montar template do curso de WordPress Avançado da DRC Trein
 Colaboradores
 =======
 
-@fellyph
-@vogeljr
+[Fellyph Cintra](https://github.com/fellyph)
+[Roberto Vogel](https://github.com/vogeljr)
