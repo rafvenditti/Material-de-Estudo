@@ -139,3 +139,46 @@ function custom_login_logo() {
 	</style>';
 }
 add_action('login_head', 'custom_login_logo');
+
+
+//////////////////////////////////////////////////////////////////////////
+///        FCopyright automático em seu rodapé                      /////
+////////////////////////////////////////////////////////////////////////
+
+function comicpress_copyright() {
+global $wpdb;
+$copyright_dates = $wpdb->get_results("
+SELECT
+YEAR(min(post_date_gmt)) AS firstdate,
+YEAR(max(post_date_gmt)) AS lastdate
+FROM
+$wpdb->posts
+WHERE
+post_status = 'publish'
+");
+$output = ";
+if($copyright_dates) {
+$copyright = "&copy; " . $copyright_dates[0]->firstdate;
+if($copyright_dates[0]->firstdate != $copyright_dates[0]->lastdate) {
+$copyright .= '-' . $copyright_dates[0]->lastdate;
+}
+$output = $copyright;
+}
+return $output;
+}
+
+Depois de colocar essa função no seu WordPress, copie e cole o seguinte código para o seu arquivo footer.php, onde pretende mostrar a data atualizada:
+<?php echo comicpress_copyright(); ?>
+
+A função procura pela data do seu primeiro e a do seu último artigo, mostrando depois o seu copyright como algo do tipo © 2006 2010.
+
+//////////////////////////////////////////////////////////////////////////
+///        Aumentar o tamanho dos resumos                           /////
+////////////////////////////////////////////////////////////////////////
+
+function new_excerpt_length($length) {
+return 100;
+}
+add_filter('excerpt_length', 'new_excerpt_length');
+
+
