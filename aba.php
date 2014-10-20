@@ -1,4 +1,4 @@
-v id="primary" class="content-area">
+<div id="primary" class="content-area">
     <main id="tab" class="site-main" role="main">
 
         <ul id="tabs">
